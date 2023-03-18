@@ -1,0 +1,1788 @@
+definitions:
+  commons.DataTableColumn:
+    properties:
+      name:
+        type: string
+      orderable:
+        type: boolean
+      searchValue:
+        type: string
+      searchable:
+        type: boolean
+    type: object
+  commons.DataTableFilter:
+    properties:
+      field:
+        type: string
+      operator:
+        type: string
+      value:
+        type: string
+    type: object
+  commons.DataTableOrder:
+    properties:
+      direction:
+        type: string
+      field:
+        type: string
+    type: object
+  commons.DataTableRequest:
+    properties:
+      columns:
+        items:
+          $ref: '#/definitions/commons.DataTableColumn'
+        type: array
+      filters:
+        items:
+          $ref: '#/definitions/commons.DataTableFilter'
+        type: array
+      orders:
+        items:
+          $ref: '#/definitions/commons.DataTableOrder'
+        type: array
+      page:
+        type: integer
+      search:
+        type: string
+      size:
+        type: integer
+    type: object
+  dto.LoginDto:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  dto.NewProductDto:
+    properties:
+      name:
+        type: string
+      product_category_id:
+        type: string
+    required:
+    - name
+    - product_category_id
+    type: object
+  dto.RegisterDto:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      is_admin:
+        type: boolean
+      last_name:
+        type: string
+      password:
+        type: string
+      user_type:
+        type: integer
+    required:
+    - email
+    - first_name
+    - is_admin
+    - password
+    - user_type
+    type: object
+  models.ApplicationUser:
+    properties:
+      address:
+        type: string
+      approved_at:
+        type: string
+      approved_by:
+        type: string
+      created_at:
+        type: string
+      created_by:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      extension:
+        type: string
+      fb_uid:
+        type: string
+      filename:
+        type: string
+      filepath:
+        type: string
+      filepath_thumbnail:
+        type: string
+      first_name:
+        type: string
+      gender:
+        type: boolean
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_admin:
+        type: boolean
+      is_default:
+        type: boolean
+      is_email_verified:
+        type: boolean
+      is_locked:
+        type: boolean
+      is_phone_verified:
+        type: boolean
+      is_system_admin:
+        type: boolean
+      last_name:
+        type: string
+      organization_id:
+        type: string
+      owner_id:
+        type: string
+      phone:
+        type: string
+      size:
+        type: string
+      submitted_at:
+        type: string
+      submitted_by:
+        type: string
+      tenant_id:
+        type: string
+      title:
+        type: string
+      token:
+        type: string
+      total_point:
+        type: integer
+      updated_at:
+        type: string
+      updated_by:
+        type: string
+      user_type:
+        type: integer
+      username:
+        type: string
+    type: object
+  models.Organization:
+    properties:
+      approved_at:
+        type: string
+      approved_by:
+        type: string
+      created_at:
+        type: string
+      created_by:
+        type: string
+      description:
+        type: string
+      entity_id:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_default:
+        type: boolean
+      is_locked:
+        type: boolean
+      name:
+        type: string
+      owner_id:
+        type: string
+      submitted_at:
+        type: string
+      submitted_by:
+        type: string
+      updated_at:
+        type: string
+      updated_by:
+        type: string
+    type: object
+  models.Product:
+    properties:
+      approved_at:
+        type: string
+      approved_by:
+        type: string
+      created_at:
+        type: string
+      created_by:
+        type: string
+      description:
+        type: string
+      entity_id:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_default:
+        type: boolean
+      is_locked:
+        type: boolean
+      name:
+        type: string
+      organization_id:
+        type: string
+      owner_id:
+        type: string
+      product_category_id:
+        type: string
+      submitted_at:
+        type: string
+      submitted_by:
+        type: string
+      updated_at:
+        type: string
+      updated_by:
+        type: string
+    type: object
+  models.ProductCategory:
+    properties:
+      approved_at:
+        type: string
+      approved_by:
+        type: string
+      created_at:
+        type: string
+      created_by:
+        type: string
+      description:
+        type: string
+      entity_id:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_default:
+        type: boolean
+      is_locked:
+        type: boolean
+      name:
+        type: string
+      organization_id:
+        type: string
+      owner_id:
+        type: string
+      submitted_at:
+        type: string
+      submitted_by:
+        type: string
+      updated_at:
+        type: string
+      updated_by:
+        type: string
+    type: object
+  models.ProductDetail:
+    properties:
+      approved_at:
+        type: string
+      approved_by:
+        type: string
+      created_at:
+        type: string
+      created_by:
+        type: string
+      entity_id:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_default:
+        type: boolean
+      is_locked:
+        type: boolean
+      item_name:
+        type: string
+      organization_id:
+        type: string
+      owner_id:
+        type: string
+      product_id:
+        type: string
+      service_type_id:
+        type: string
+      submitted_at:
+        type: string
+      submitted_by:
+        type: string
+      uom_id:
+        type: string
+      updated_at:
+        type: string
+      updated_by:
+        type: string
+    type: object
+  models.ServiceType:
+    properties:
+      approved_at:
+        type: string
+      approved_by:
+        type: string
+      created_at:
+        type: string
+      created_by:
+        type: string
+      description:
+        type: string
+      entity_id:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_default:
+        type: boolean
+      is_locked:
+        type: boolean
+      name:
+        type: string
+      organization_id:
+        type: string
+      owner_id:
+        type: string
+      submitted_at:
+        type: string
+      submitted_by:
+        type: string
+      updated_at:
+        type: string
+      updated_by:
+        type: string
+    type: object
+  models.Tenant:
+    properties:
+      address:
+        type: string
+      approved_at:
+        type: string
+      approved_by:
+        type: string
+      created_at:
+        type: string
+      created_by:
+        type: string
+      description:
+        type: string
+      entity_id:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_default:
+        type: boolean
+      is_locked:
+        type: boolean
+      name:
+        type: string
+      organization_id:
+        type: string
+      owner_id:
+        type: string
+      phone:
+        type: string
+      submitted_at:
+        type: string
+      submitted_by:
+        type: string
+      updated_at:
+        type: string
+      updated_by:
+        type: string
+    type: object
+  models.Uom:
+    properties:
+      approved_at:
+        type: string
+      approved_by:
+        type: string
+      created_at:
+        type: string
+      created_by:
+        type: string
+      entity_id:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_default:
+        type: boolean
+      is_locked:
+        type: boolean
+      organization_id:
+        type: string
+      owner_id:
+        type: string
+      submitted_at:
+        type: string
+      submitted_by:
+        type: string
+      uom_code:
+        type: string
+      uom_name:
+        type: string
+      uom_symbol:
+        type: string
+      updated_at:
+        type: string
+      updated_by:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /application_user/getAll:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      tags:
+      - Application User
+  /application_user/getProfile:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      tags:
+      - Application User
+  /application_user/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: application_user
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      tags:
+      - Application User
+  /application_user/update:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: application_user
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ApplicationUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      tags:
+      - Application User
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Authentication
+  /organization/update:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: organization
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Organization'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      tags:
+      - Organization
+  /product/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Product
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.NewProductDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product
+  /product/deleteById/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product
+  /product/detail/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Product Detail
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductDetail'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product
+  /product/getAll:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product
+  /product/getById/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product
+  /product/getPagination:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ' '
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/commons.DataTableRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product
+  /product/update:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: product
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Product'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product
+  /product_category/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ProductCategory
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductCategory'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product Category
+  /product_category/deleteById/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product Category
+  /product_category/getAll:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product Category
+  /product_category/getById/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product Category
+  /product_category/getPagination:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ' '
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/commons.DataTableRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product Category
+  /product_category/update:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: productCategory
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductCategory'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Product Category
+  /service_type/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ServiceType
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ServiceType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Service Type
+  /service_type/deleteById/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Service Type
+  /service_type/getAll:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Service Type
+  /service_type/getById/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Service Type
+  /service_type/getPagination:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ' '
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/commons.DataTableRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Service Type
+  /service_type/update:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: serviceType
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ServiceType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Service Type
+  /tenant/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: tenant
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Tenant'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Tenant
+  /tenant/deleteById/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Tenant
+  /tenant/getAll:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Tenant
+  /tenant/getById/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Tenant
+  /tenant/getPagination:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ' '
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/commons.DataTableRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Tenant
+  /tenant/update:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: tenant
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Tenant'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Tenant
+  /uom/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Uom
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Uom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Unit of Measurement
+  /uom/deleteById/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Unit of Measurement
+  /uom/getAll:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Unit of Measurement
+  /uom/getById/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Unit of Measurement
+  /uom/getPagination:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: ' '
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/commons.DataTableRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Unit of Measurement
+  /uom/update:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: uom
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Uom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+      security:
+      - BearerAuth: []
+      tags:
+      - Unit of Measurement
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
