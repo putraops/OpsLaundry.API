@@ -13,7 +13,7 @@ import (
 type ProductService interface {
 	Create(context *gin.Context, record models.Product) (interface{}, error)
 	Update(context *gin.Context, record models.Product) (interface{}, error)
-	GetPagination(context *gin.Context, request commons.DataTableRequest) (interface{}, error)
+	GetPagination(context *gin.Context, request commons.DataTableRequest) interface{}
 	GetAll(context *gin.Context) (interface{}, error)
 	GetById(context *gin.Context, id string) (interface{}, error)
 	DeleteById(context *gin.Context, id string) error
@@ -39,7 +39,7 @@ func (r *productService) Update(context *gin.Context, record models.Product) (in
 	return r.productRepository.Update(context, record)
 }
 
-func (r *productService) GetPagination(context *gin.Context, request commons.DataTableRequest) (interface{}, error) {
+func (r *productService) GetPagination(context *gin.Context, request commons.DataTableRequest) interface{} {
 	context.Set("table", models.Product{})
 	context.Set("table_name", models.Product{}.TableName())
 	context.Set("view", views.Product{})

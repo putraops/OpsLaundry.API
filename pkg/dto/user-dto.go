@@ -6,7 +6,7 @@ type RegisterDto struct {
 	Email     string `json:"email" form:"email" binding:"required,email"`
 	Password  string `json:"password" form:"password" binding:"required"`
 	UserType  int    `json:"user_type" form:"user_type" binding:"required"`
-	IsAdmin   bool   `json:"is_admin" form:"is_admin" binding:"required"`
+	IsAdmin   bool   `json:"is_admin" form:"is_admin;default:false"`
 }
 
 // type ApplicationUserDescriptionDto struct {

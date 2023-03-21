@@ -41,7 +41,7 @@ func NewProductCategoryController(db *gorm.DB) ProductCategoryController {
 // @Accept       json
 // @Produce      json
 // @Param        Request body models.ProductCategory true "ProductCategory"
-// @Failure 	 200,204,400,401,404 {object} object
+// @Failure 	 200,201,204,400,401,404 {object} object
 // @Router       /product_category/create [post]
 func (r *productCategoryController) Create(context *gin.Context) {
 	var record models.ProductCategory
@@ -57,7 +57,7 @@ func (r *productCategoryController) Create(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, result)
+	context.JSON(http.StatusCreated, result)
 	return
 }
 
@@ -107,11 +107,7 @@ func (r *productCategoryController) GetPagination(context *gin.Context) {
 		return
 	}
 
-	result, err := r.productCategoryService.GetPagination(context, req)
-	if err != nil {
-		context.AbortWithStatusJSON(http.StatusBadRequest, commons.ErrorResponse(err.Error()))
-		return
-	}
+	result := r.productCategoryService.GetPagination(context, req).(commons.DataTableResponse)
 	context.JSON(http.StatusOK, result)
 	return
 }

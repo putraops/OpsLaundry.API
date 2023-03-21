@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"errors"
 	"fmt"
 	"opslaundry/pkg/commons"
 	"opslaundry/pkg/constants"
@@ -15,7 +14,7 @@ import (
 )
 
 type BaseRepository interface {
-	GetPagination(context *gin.Context, request commons.DataTableRequest, isTenantFilter bool, sqlFilter ...interface{}) (interface{}, error)
+	GetPagination(context *gin.Context, request commons.DataTableRequest, isTenantFilter bool, sqlFilter ...interface{}) interface{}
 }
 
 type baseConnection struct {
@@ -108,16 +107,18 @@ func filterByOperator(field string, operator string, value string) string {
 	return result
 }
 
-func (r baseConnection) GetPagination(context *gin.Context, request commons.DataTableRequest, isTenantFilter bool, sqlFilter ...interface{}) (interface{}, error) {
+func (r baseConnection) GetPagination(context *gin.Context, request commons.DataTableRequest, isTenantFilter bool, sqlFilter ...interface{}) interface{} {
 	var response commons.DataTableResponse
 	tableName, ok := context.Get("table_name")
 	if !ok {
-		return nil, errors.New("Table name is undefined")
+		fmt.Println("tableName")
+		return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: "Table name is undefined"}
 	}
 
 	userLogin, ok := context.Get(constants.USER_IDENTITY)
 	if !ok {
-		return nil, errors.New("Failed to get UserIdentity from context")
+		fmt.Println("userLogin")
+		return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: "Failed to get UserIdentity from context"}
 	}
 
 	var records []map[string]interface{}
@@ -128,14 +129,16 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 	if len(request.Filters) > 0 {
 		for _, v := range request.Filters {
 			if !fieldInSlice(v.Field, selectedFields) {
-				return nil, errors.New(fmt.Sprintf("Kolom %v dalam Filter tidak terdaftar.", v.Field))
+				fmt.Println("filter")
+				return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: fmt.Sprintf("Kolom %v dalam Filter tidak terdaftar.", v.Field)}
 			}
 		}
 	}
 	if len(request.Orders) > 0 {
 		for _, v := range request.Orders {
 			if !fieldInSlice(v.Field, selectedFields) {
-				return nil, errors.New(fmt.Sprintf("Kolom %v dalam Order tidak terdaftar.", v.Field))
+				fmt.Println("Orders")
+				return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: fmt.Sprintf("Kolom %v dalam Order tidak terdaftar.", v.Field)}
 			}
 		}
 	}
@@ -147,7 +150,7 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 	}
 
 	if err := r.DB.Raw(fmt.Sprintf("SELECT COUNT(id) FROM %v WHERE %v", tableName, conditions)).Scan(&response.RecordsTotal).Error; err != nil {
-		return nil, err
+		return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: err.Error()}
 	}
 
 	if response.RecordsTotal > 0 {
@@ -209,17 +212,17 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 
 		if err := r.DB.
 			//Select("ROW_NUMBER() OVER( ORDER BY COALESCE(submitted_at, created_at) DESC)").
-			// Debug().
+			Debug().
 			Order(orders).
 			Select(strings.Join(selectedFields, ", ")).Table(fmt.Sprintf("vw_%v", tableName)).
 			// Where(canRead).Where(conditions).Where(searchConditions).
 			Where(conditions).
 			Offset(offset).Limit(pageSize).Find(&records).Error; err != nil {
-			return nil, err
+			return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: err.Error()}
 		}
 	}
 
 	response.RecordsFiltered = int(len(records))
 	response.Data = records
-	return response, nil
+	return response
 }

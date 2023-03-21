@@ -13,7 +13,7 @@ import (
 type ServiceTypeService interface {
 	Create(context *gin.Context, record models.ServiceType) (interface{}, error)
 	Update(context *gin.Context, record models.ServiceType) (interface{}, error)
-	GetPagination(context *gin.Context, request commons.DataTableRequest) (interface{}, error)
+	GetPagination(context *gin.Context, request commons.DataTableRequest) interface{}
 	GetAll(context *gin.Context) (interface{}, error)
 	GetById(context *gin.Context, id string) (interface{}, error)
 	DeleteById(context *gin.Context, id string) error
@@ -39,7 +39,7 @@ func (r *serviceTypeService) Update(context *gin.Context, record models.ServiceT
 	return r.serviceTypeRepository.Update(context, record)
 }
 
-func (r *serviceTypeService) GetPagination(context *gin.Context, request commons.DataTableRequest) (interface{}, error) {
+func (r *serviceTypeService) GetPagination(context *gin.Context, request commons.DataTableRequest) interface{} {
 	context.Set("table", models.ServiceType{})
 	context.Set("table_name", models.ServiceType{}.TableName())
 	context.Set("view", views.ServiceType{})

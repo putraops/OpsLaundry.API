@@ -107,11 +107,7 @@ func (r tenantController) GetPagination(context *gin.Context) {
 		return
 	}
 
-	result, err := r.tenantService.GetPagination(context, req)
-	if err != nil {
-		context.AbortWithStatusJSON(http.StatusBadRequest, commons.ErrorResponse(err.Error()))
-		return
-	}
+	result := r.tenantService.GetPagination(context, req).(commons.DataTableResponse)
 	context.JSON(http.StatusOK, result)
 	return
 }

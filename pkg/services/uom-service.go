@@ -13,7 +13,7 @@ import (
 type UomService interface {
 	Create(context *gin.Context, record models.Uom) (interface{}, error)
 	Update(context *gin.Context, record models.Uom) (interface{}, error)
-	GetPagination(context *gin.Context, request commons.DataTableRequest) (interface{}, error)
+	GetPagination(context *gin.Context, request commons.DataTableRequest) interface{}
 	GetAll(context *gin.Context) (interface{}, error)
 	GetById(context *gin.Context, id string) (interface{}, error)
 	DeleteById(context *gin.Context, id string) error
@@ -39,7 +39,7 @@ func (r *uomService) Update(context *gin.Context, record models.Uom) (interface{
 	return r.uomRepository.Update(context, record)
 }
 
-func (r *uomService) GetPagination(context *gin.Context, request commons.DataTableRequest) (interface{}, error) {
+func (r *uomService) GetPagination(context *gin.Context, request commons.DataTableRequest) interface{} {
 	context.Set("table", models.Uom{})
 	context.Set("table_name", models.Uom{}.TableName())
 	context.Set("view", views.Uom{})

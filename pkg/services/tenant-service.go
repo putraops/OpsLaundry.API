@@ -13,7 +13,7 @@ import (
 type TenantService interface {
 	Create(context *gin.Context, record models.Tenant) (interface{}, error)
 	Update(context *gin.Context, record models.Tenant) (interface{}, error)
-	GetPagination(context *gin.Context, request commons.DataTableRequest) (interface{}, error)
+	GetPagination(context *gin.Context, request commons.DataTableRequest) interface{}
 	GetAll(context *gin.Context) (interface{}, error)
 	GetById(context *gin.Context, id string) (interface{}, error)
 	DeleteById(context *gin.Context, id string) error
@@ -39,7 +39,7 @@ func (r *tenantService) Update(context *gin.Context, record models.Tenant) (inte
 	return r.tenantRepository.Update(context, record)
 }
 
-func (r tenantService) GetPagination(context *gin.Context, request commons.DataTableRequest) (interface{}, error) {
+func (r tenantService) GetPagination(context *gin.Context, request commons.DataTableRequest) interface{} {
 	context.Set("table", models.Tenant{})
 	context.Set("table_name", models.Tenant{}.TableName())
 	context.Set("view", views.Tenant{})

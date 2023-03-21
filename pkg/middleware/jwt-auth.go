@@ -21,8 +21,12 @@ func AuthorizeJWT(jwtService services.JWTService) gin.HandlerFunc {
 		}
 
 		token := strings.Split(authorizationHeader, " ")
+		if len(token) != 2 {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, map[string]interface{}{"error": "Token is invalid"})
+			return
+		}
+
 		if token[0] != "Bearer" {
-			c.JSON(http.StatusUnauthorized, "Token Key is invalid!")
 			c.AbortWithStatusJSON(http.StatusUnauthorized, map[string]interface{}{"error": "Token Key is not valid"})
 			return
 		}
