@@ -51,12 +51,11 @@ func (r organizationController) Update(context *gin.Context) {
 
 	result, err := r.organizationService.Update(context, record)
 	if err != nil {
-		context.JSON(http.StatusBadRequest, err.Error())
+		context.JSON(http.StatusBadRequest, commons.ErrorResponse(err.Error()))
 		return
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // // @Tags         Organization

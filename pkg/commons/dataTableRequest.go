@@ -6,11 +6,11 @@ type DataTableRequest struct {
 	Orders  []DataTableOrder  `json:"orders"`
 	Page    int               `json:"page" form:"page"`
 	Search  *string           `json:"search"`
-	Size    int               `json:"size" form:"size"`
+	Length  int               `json:"length" form:"length"`
 }
 
 type DataTableFilter struct {
-	Field    string `json:"field" form:"field"`
+	Column   string `json:"column" form:"column"`
 	Operator string `json:"operator" form:"operator"`
 	Value    string `json:"value" form:"value"`
 }
@@ -28,7 +28,7 @@ type DataTableSearch struct {
 }
 
 type DataTableOrder struct {
-	Field     string `json:"field" form:"field"`
+	Column    string `json:"column" form:"column"`
 	Direction string `json:"direction" form:"direction"`
 }
 

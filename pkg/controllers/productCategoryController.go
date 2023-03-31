@@ -58,7 +58,6 @@ func (r *productCategoryController) Create(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusCreated, result)
-	return
 }
 
 // @Tags         Product Category
@@ -89,7 +88,6 @@ func (r *productCategoryController) Update(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Product Category
@@ -103,13 +101,12 @@ func (r *productCategoryController) GetPagination(context *gin.Context) {
 	var req commons.DataTableRequest
 
 	if err := context.BindJSON(&req); err != nil {
-		context.AbortWithStatusJSON(http.StatusBadRequest, commons.ErrorResponse(err.Error()))
+		context.AbortWithStatusJSON(http.StatusBadRequest, err.Error())
 		return
 	}
 
 	result := r.productCategoryService.GetPagination(context, req).(commons.DataTableResponse)
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Product Category
@@ -133,7 +130,6 @@ func (r *productCategoryController) GetAll(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Product Category
@@ -163,7 +159,6 @@ func (r *productCategoryController) GetById(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Product Category
@@ -193,5 +188,4 @@ func (r *productCategoryController) DeleteById(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, constants.DeletedMessage)
-	return
 }

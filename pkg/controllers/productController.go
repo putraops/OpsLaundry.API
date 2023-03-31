@@ -58,7 +58,7 @@ func (r *productController) Create(context *gin.Context) {
 	}
 
 	if err := smapping.FillStruct(&record, smapping.MapFields(&dto)); err != nil {
-		context.JSON(http.StatusBadRequest, err.Error())
+		context.JSON(http.StatusBadRequest, commons.ErrorResponse(err.Error()))
 		return
 	}
 
@@ -69,7 +69,6 @@ func (r *productController) Create(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Product

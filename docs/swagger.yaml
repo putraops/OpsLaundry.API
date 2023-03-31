@@ -12,7 +12,7 @@ definitions:
     type: object
   commons.DataTableFilter:
     properties:
-      field:
+      column:
         type: string
       operator:
         type: string
@@ -21,9 +21,9 @@ definitions:
     type: object
   commons.DataTableOrder:
     properties:
-      direction:
+      column:
         type: string
-      field:
+      direction:
         type: string
     type: object
   commons.DataTableRequest:
@@ -36,6 +36,8 @@ definitions:
         items:
           $ref: '#/definitions/commons.DataTableFilter'
         type: array
+      length:
+        type: integer
       orders:
         items:
           $ref: '#/definitions/commons.DataTableOrder'
@@ -44,8 +46,6 @@ definitions:
         type: integer
       search:
         type: string
-      size:
-        type: integer
     type: object
   dto.LoginDto:
     properties:
@@ -84,7 +84,6 @@ definitions:
     required:
     - email
     - first_name
-    - is_admin
     - password
     - user_type
     type: object
@@ -920,6 +919,10 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            type: object
+        "201":
+          description: Created
           schema:
             type: object
         "204":

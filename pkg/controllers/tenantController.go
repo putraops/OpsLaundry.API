@@ -58,7 +58,6 @@ func (r tenantController) Create(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Tenant
@@ -89,7 +88,6 @@ func (r tenantController) Update(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Tenant
@@ -109,7 +107,6 @@ func (r tenantController) GetPagination(context *gin.Context) {
 
 	result := r.tenantService.GetPagination(context, req).(commons.DataTableResponse)
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Tenant
@@ -133,7 +130,6 @@ func (r tenantController) GetAll(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Tenant
@@ -163,7 +159,6 @@ func (r tenantController) GetById(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Tenant
@@ -193,5 +188,4 @@ func (r tenantController) DeleteById(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, constants.DeletedMessage)
-	return
 }

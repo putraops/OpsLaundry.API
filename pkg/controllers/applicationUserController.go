@@ -66,12 +66,11 @@ func (r applicationUserController) Register(context *gin.Context) {
 
 	result, err := r.applicationUserService.Register(context, dto)
 	if err != nil {
-		context.JSON(http.StatusBadRequest, err.Error())
+		context.JSON(http.StatusBadRequest, commons.ErrorResponse(err.Error()))
 		return
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Application User
@@ -95,12 +94,11 @@ func (r applicationUserController) Update(context *gin.Context) {
 
 	result, err := r.applicationUserService.Update(context, record)
 	if err != nil {
-		context.JSON(http.StatusBadRequest, err.Error())
+		context.JSON(http.StatusBadRequest, commons.ErrorResponse(err.Error()))
 		return
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Application User
@@ -120,12 +118,11 @@ func (r applicationUserController) GetProfile(context *gin.Context) {
 			context.AbortWithStatus(http.StatusNoContent)
 			return
 		}
-		context.JSON(http.StatusBadRequest, err.Error())
+		context.JSON(http.StatusBadRequest, commons.ErrorResponse(err.Error()))
 		return
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Application User
@@ -149,7 +146,6 @@ func (r applicationUserController) GetAll(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // // @Tags         Application User

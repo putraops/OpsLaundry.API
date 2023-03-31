@@ -788,6 +788,12 @@
                             "type": "object"
                         }
                     },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
                     "204": {
                         "description": "No Content",
                         "schema": {
@@ -2180,7 +2186,7 @@
         "commons.DataTableFilter": {
             "type": "object",
             "properties": {
-                "field": {
+                "column": {
                     "type": "string"
                 },
                 "operator": {
@@ -2194,10 +2200,10 @@
         "commons.DataTableOrder": {
             "type": "object",
             "properties": {
-                "direction": {
+                "column": {
                     "type": "string"
                 },
-                "field": {
+                "direction": {
                     "type": "string"
                 }
             }
@@ -2217,6 +2223,9 @@
                         "$ref": "#/definitions/commons.DataTableFilter"
                     }
                 },
+                "length": {
+                    "type": "integer"
+                },
                 "orders": {
                     "type": "array",
                     "items": {
@@ -2228,9 +2237,6 @@
                 },
                 "search": {
                     "type": "string"
-                },
-                "size": {
-                    "type": "integer"
                 }
             }
         },
@@ -2269,7 +2275,6 @@
             "required": [
                 "email",
                 "first_name",
-                "is_admin",
                 "password",
                 "user_type"
             ],

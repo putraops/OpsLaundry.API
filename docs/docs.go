@@ -800,6 +800,12 @@ const docTemplate = `{
                             "type": "object"
                         }
                     },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
                     "204": {
                         "description": "No Content",
                         "schema": {
@@ -2192,7 +2198,7 @@ const docTemplate = `{
         "commons.DataTableFilter": {
             "type": "object",
             "properties": {
-                "field": {
+                "column": {
                     "type": "string"
                 },
                 "operator": {
@@ -2206,10 +2212,10 @@ const docTemplate = `{
         "commons.DataTableOrder": {
             "type": "object",
             "properties": {
-                "direction": {
+                "column": {
                     "type": "string"
                 },
-                "field": {
+                "direction": {
                     "type": "string"
                 }
             }
@@ -2229,6 +2235,9 @@ const docTemplate = `{
                         "$ref": "#/definitions/commons.DataTableFilter"
                     }
                 },
+                "length": {
+                    "type": "integer"
+                },
                 "orders": {
                     "type": "array",
                     "items": {
@@ -2240,9 +2249,6 @@ const docTemplate = `{
                 },
                 "search": {
                     "type": "string"
-                },
-                "size": {
-                    "type": "integer"
                 }
             }
         },
@@ -2281,7 +2287,6 @@ const docTemplate = `{
             "required": [
                 "email",
                 "first_name",
-                "is_admin",
                 "password",
                 "user_type"
             ],

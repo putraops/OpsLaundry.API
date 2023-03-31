@@ -3,6 +3,7 @@ package services
 import (
 	"errors"
 	"net/http"
+	"opslaundry/pkg/commons"
 	"opslaundry/pkg/constants"
 	"opslaundry/pkg/dto"
 	"opslaundry/pkg/models"
@@ -76,7 +77,7 @@ func (r applicationUserService) Register(context *gin.Context, dto dto.RegisterD
 	// r.DB.Set("identity", userIdentity)
 
 	if err := smapping.FillStruct(&record, smapping.MapFields(&dto)); err != nil {
-		context.JSON(http.StatusBadRequest, err.Error())
+		context.JSON(http.StatusBadRequest, commons.ErrorResponse(err.Error()))
 		return nil, err
 	}
 

@@ -58,7 +58,6 @@ func (r *serviceTypeController) Create(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Service Type
@@ -89,7 +88,6 @@ func (r *serviceTypeController) Update(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Service Type
@@ -109,7 +107,6 @@ func (r *serviceTypeController) GetPagination(context *gin.Context) {
 
 	result := r.serviceTypeService.GetPagination(context, req).(commons.DataTableResponse)
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Service Type
@@ -133,7 +130,6 @@ func (r *serviceTypeController) GetAll(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Service Type
@@ -163,7 +159,6 @@ func (r *serviceTypeController) GetById(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Service Type
@@ -193,5 +188,4 @@ func (r *serviceTypeController) DeleteById(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, constants.DeletedMessage)
-	return
 }

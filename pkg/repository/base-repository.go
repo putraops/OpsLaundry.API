@@ -128,17 +128,18 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 	//region Validation
 	if len(request.Filters) > 0 {
 		for _, v := range request.Filters {
-			if !fieldInSlice(v.Field, selectedFields) {
+			if !fieldInSlice(v.Column, selectedFields) {
 				fmt.Println("filter")
-				return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: fmt.Sprintf("Kolom %v dalam Filter tidak terdaftar.", v.Field)}
+				return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: fmt.Sprintf("Kolom %v dalam Filter tidak terdaftar.", v.Column)}
 			}
 		}
 	}
 	if len(request.Orders) > 0 {
 		for _, v := range request.Orders {
-			if !fieldInSlice(v.Field, selectedFields) {
+			if !fieldInSlice(v.Column, selectedFields) {
 				fmt.Println("Orders")
-				return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: fmt.Sprintf("Kolom %v dalam Order tidak terdaftar.", v.Field)}
+				fmt.Println(v.Column)
+				return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: fmt.Sprintf("Kolom %v dalam Order tidak terdaftar.", v.Column)}
 			}
 		}
 	}
@@ -159,12 +160,15 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 			page = 1
 		}
 
-		pageSize := request.Size
+		pageLength := request.Length
 		switch {
-		case pageSize <= 0:
-			pageSize = 10
+		case pageLength <= 0:
+			pageLength = 10
 		}
-		offset := (page - 1) * pageSize
+		var offset int = 0
+		if page > 0 {
+			offset = (page - 1) * pageLength
+		}
 
 		if request.Search != nil && *request.Search != "" {
 			conditions += " AND ("
@@ -188,7 +192,7 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 					if total > 0 {
 						conditions += " AND"
 					}
-					conditions += filterByOperator(v.Field, v.Operator, v.Value)
+					conditions += filterByOperator(v.Column, v.Operator, v.Value)
 					total++
 				}
 			}
@@ -203,7 +207,7 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 				if order_total > 0 {
 					orders += ", "
 				}
-				orders += fmt.Sprintf("%v %v", v.Field, v.Direction)
+				orders += fmt.Sprintf("%v %v", v.Column, v.Direction)
 				order_total++
 			}
 		} else {
@@ -217,7 +221,7 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 			Select(strings.Join(selectedFields, ", ")).Table(fmt.Sprintf("vw_%v", tableName)).
 			// Where(canRead).Where(conditions).Where(searchConditions).
 			Where(conditions).
-			Offset(offset).Limit(pageSize).Find(&records).Error; err != nil {
+			Offset(offset).Limit(pageLength).Find(&records).Error; err != nil {
 			return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: err.Error()}
 		}
 	}

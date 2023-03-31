@@ -58,7 +58,6 @@ func (r *uomController) Create(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Unit of Measurement
@@ -89,7 +88,6 @@ func (r *uomController) Update(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Unit of Measurement
@@ -109,7 +107,6 @@ func (r *uomController) GetPagination(context *gin.Context) {
 
 	result := r.uomService.GetPagination(context, req).(commons.DataTableResponse)
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Unit of Measurement
@@ -133,7 +130,6 @@ func (r *uomController) GetAll(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Unit of Measurement
@@ -163,7 +159,6 @@ func (r *uomController) GetById(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, result)
-	return
 }
 
 // @Tags         Unit of Measurement
@@ -193,5 +188,4 @@ func (r *uomController) DeleteById(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, constants.DeletedMessage)
-	return
 }
