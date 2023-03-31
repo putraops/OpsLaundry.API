@@ -129,7 +129,7 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 	if len(request.Filters) > 0 {
 		for _, v := range request.Filters {
 			if !fieldInSlice(v.Column, selectedFields) {
-				fmt.Println("filter")
+				fmt.Println("Has Unregistered field in Filters")
 				return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: fmt.Sprintf("Kolom %v dalam Filter tidak terdaftar.", v.Column)}
 			}
 		}
@@ -137,7 +137,7 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 	if len(request.Orders) > 0 {
 		for _, v := range request.Orders {
 			if !fieldInSlice(v.Column, selectedFields) {
-				fmt.Println("Orders")
+				fmt.Println("Has Unregistered field in Orders")
 				fmt.Println(v.Column)
 				return commons.DataTableResponse{RecordsTotal: 0, RecordsFiltered: 0, Data: nil, Draw: 0, Error: fmt.Sprintf("Kolom %v dalam Order tidak terdaftar.", v.Column)}
 			}
@@ -214,6 +214,7 @@ func (r baseConnection) GetPagination(context *gin.Context, request commons.Data
 			orders = "COALESCE(submitted_at, created_at) DESC"
 		}
 
+		fmt.Println("asdasd")
 		if err := r.DB.
 			//Select("ROW_NUMBER() OVER( ORDER BY COALESCE(submitted_at, created_at) DESC)").
 			Debug().
